@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
 })
 
 export class HeaderComponent {
-
+  @Output() onChangeView: EventEmitter<string> = new EventEmitter<string>();
+  changeView(view: string) {
+    this.onChangeView.emit(view);
+  }
 }
