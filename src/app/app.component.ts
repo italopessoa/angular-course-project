@@ -6,8 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currentView: string = 'shopping-list';
-  onViewChanged(view: string) {
-    this.currentView = view;
-  }
 }
