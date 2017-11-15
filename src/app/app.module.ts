@@ -12,7 +12,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { DropdownDirective } from "./shared/dropdown.directive";
 import { ShoppingListService } from './shared/services/shopping-list.service';
-import { RecipeService } from './shared/services/recipe.service';
+import { RecipeService } from './recipes/recipe-list/recipe.service';
 
 @NgModule({
   declarations: [
