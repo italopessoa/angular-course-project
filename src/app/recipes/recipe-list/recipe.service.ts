@@ -17,7 +17,7 @@ export class RecipeService {
         new Ingredient("Queijo", 3)
       ]
     ),
-    new Recipe('Sauduíche de ovo', 'Fácil, rápido e barato', '../../../assets/tr.jpg', [
+    new Recipe('Sanduíche de ovo', 'Fácil, rápido e barato', '../../../assets/tr.jpg', [
       new Ingredient("Pão", 1),
       new Ingredient("Ovo", 2),
       new Ingredient("Orégano", 1),
@@ -30,7 +30,7 @@ export class RecipeService {
 
   getRecipe(id: number) {
     const index = this.recipes.findIndex(r => r.id === id);
-    return this.recipes[index];
+    return Object.assign({}, this.recipes[index]);
   }
 
   getRecipes = () => this.recipes.slice();
