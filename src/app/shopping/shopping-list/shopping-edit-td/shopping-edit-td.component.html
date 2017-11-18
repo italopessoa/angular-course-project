@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="addIngredient()" #ingredientForm="ngForm">
+      <div class="row">
+        <div ngModelGroup="ingredientData" #ingredientData="ngModelGroup">
+          <div class="col-sm-5 form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" #nameInput="ngModel" ngModel required>
+            <span class="help-block" *ngIf="nameInput.invalid && nameInput.touched">Please enter a valid Name!</span>
+          </div>
+          <div class="col-sm-4 col-md-3">
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" id="amount" class="form-control" #amountInput="ngModel" ngModel required>
+            <span class="help-block" *ngIf="amountInput.invalid && amountInput.touched">Please enter a valid amount!</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="ingredientForm.invalid">Add</button>
+          <button class="btn btn-danger" type="button">Delete</button>
+          <button class="btn btn-primary" type="button">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
