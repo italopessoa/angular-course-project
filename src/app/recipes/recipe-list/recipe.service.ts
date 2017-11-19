@@ -2,10 +2,12 @@ import { Recipe } from "../recipe.model";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Ingredient } from "../../shared/ingredient.model";
 import { ShoppingListService } from "../../shopping/shopping-list/shopping-list.service";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class RecipeService {
   onRecipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+  onRecipesChanged: Subject<Recipe[]> = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     // new Recipe('A test recipe 1', 'This is simply a test 1', 'http://www.seriouseats.com/recipes/assets_c/2015/01/20150119-pressure-cooker-chicken-stew-food-lab-11-thumb-1500xauto-418088.jpg'),
     // new Recipe('A test recipe 2', 'This is simply a test 2', 'http://www.seriouseats.com/recipes/assets_c/2015/01/20150119-pressure-cooker-chicken-stew-food-lab-11-thumb-1500xauto-418088.jpg'),
@@ -37,5 +39,20 @@ export class RecipeService {
 
   addIngredientsToShoppingList = (ingredients: Ingredient[]) => {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  onRecipeChangedNotify() {
+    this.onRecipesChanged.next(this.recipes.slice());
+  }
+  addRecipe(recipe: Recipe) {
+    recipe['id'] = new Date().getTime() * Math.random();
+    this.recipes.push(recipe);
+    console.log(recipe)
+    this.onRecipeChangedNotify();
+  }
+  updateRecipe(recipe: Recipe) {
+    console.log(recipe)
+    this.recipes[this.recipes.findIndex(r => r.id === recipe.id)] = recipe;
+    this.onRecipeChangedNotify();
   }
 }
