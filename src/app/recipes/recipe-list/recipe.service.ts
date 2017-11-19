@@ -55,4 +55,9 @@ export class RecipeService {
     this.recipes[this.recipes.findIndex(r => r.id === recipe.id)] = recipe;
     this.onRecipeChangedNotify();
   }
+  deleteRecipe(recipeId: number) {
+    console.log(recipeId);
+    this.recipes.splice(this.recipes.findIndex(r => r.id === recipeId), 1);
+    this.onRecipeChangedNotify();
+  }
 }
