@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form (ngSubmit)="onSubmit()" [formGroup]="somethingForm">
+        <div class="row">
+          <div formGroupName="somethingData">
+            <div class="form-group col-xs-5">
+              <label for="email">Email</label>
+              <input type="text" id="email" formControlName="email" email class="form-control">
+              <span *ngIf="somethingForm.get('somethingData.email').invalid && somethingForm.get('somethingData.email').touched" class="help-block">Please provide a valid email!</span>
+            </div>
+            <div class="form-group col-xs-5">
+              <label for="something">Something</label>
+              <select name="something" id="something" formControlName="something" class="form-control" value="SomethingC">
+                <option *ngFor="let somethingItem of somethingArray" [value]="somethingItem">{{somethingItem}}</option>
+              </select>
+              <span *ngIf="somethingForm.get('somethingData.something').invalid && somethingForm.get('somethingData.something').touched"
+                class="help-block">Please select a valid something!</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button [disabled]="somethingForm.invalid && somethingForm.touched" type="submit" class="btn btn-success">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
