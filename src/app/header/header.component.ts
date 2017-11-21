@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { RecipeService } from '../recipes/recipe-list/recipe.service';
 import { DataStorageService } from '../shared/data.storage.service';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,21 @@ export class HeaderComponent {
   onSaveData() {
     this.dataStorageService.storeRecipes()
       .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
+      (response) => console.log(response),
+      (error) => console.log(error)
+      );
+  }
+  onGetData() {
+    // this.dataStorageService.getRecipesMap()
+    // .subscribe(
+    //   (recipes: any[]) => {
+    //     console.log(recipes);
+    // });
+
+    this.dataStorageService.getRecipes()
+      .subscribe(
+      (response: Response) => console.log(response.json()),
+      (error) => console.log(error)
       );
   }
 }
