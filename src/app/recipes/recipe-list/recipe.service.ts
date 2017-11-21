@@ -3,9 +3,11 @@ import { EventEmitter, Injectable } from "@angular/core";
 import { Ingredient } from "../../shared/ingredient.model";
 import { ShoppingListService } from "../../shopping/shopping-list/shopping-list.service";
 import { Subject } from "rxjs/Subject";
+import { Http } from "@angular/http";
 
 @Injectable()
 export class RecipeService {
+
   onRecipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
   onRecipesChanged: Subject<Recipe[]> = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
@@ -28,7 +30,7 @@ export class RecipeService {
     )
   ];
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService, private http: Http) { }
 
   getRecipe(id: number) {
     const index = this.recipes.findIndex(r => r.id === id);
