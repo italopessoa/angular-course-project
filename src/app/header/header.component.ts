@@ -25,17 +25,17 @@ export class HeaderComponent {
       (error) => console.log(error)
       );
   }
-  onGetData() {
+  onFetchData() {
     // this.dataStorageService.getRecipesMap()
     // .subscribe(
     //   (recipes: any[]) => {
     //     console.log(recipes);
     // });
 
-    this.dataStorageService.getRecipes()
-      .subscribe(
-      (response: Response) => console.log(response.json()),
-      (error) => console.log(error)
-      );
+    this.dataStorageService.getRecipes();
+      // .subscribe(
+      // (response: Response) => console.log(response.json()),
+      // (error) => console.log(error)
+      // );
   }
 }

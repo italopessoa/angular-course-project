@@ -62,4 +62,8 @@ export class RecipeService {
     this.recipes.splice(this.recipes.findIndex(r => r.id === recipeId), 1);
     this.onRecipeChangedNotify();
   }
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.onRecipeChangedNotify();
+  }
 }
