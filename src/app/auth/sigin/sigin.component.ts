@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-sigin',
@@ -8,9 +10,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class SiginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
+  onSignIn(form: NgForm) {
+    this.authService.signinUser(form.value.email, form.value.password);
+  }
 }
