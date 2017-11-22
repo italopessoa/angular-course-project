@@ -18,6 +18,7 @@
           <li routerLinkActive="active"><a routerLink="/signin">Login</a></li>
         </ng-template>
         <ng-template [ngIf]="authService.isAuthenticated()">
+          <li><a>Hi, <strong>{{authService.getUserName()}}!</strong></a></li>
           <li><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
           <li class="dropdown" appDropdown>
             <a class="dropdown-toggle" role="button">Manage

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import * as firebase from 'firebase';
+import { checkNoChangesView } from '@angular/core/src/view/view';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
     const config = {
       apiKey: "AIzaSyAZztSAJ1oWzCZI9yDrqV4z-UkN5pwi5Yg",
       authDomain: "ng-recipe-book-4eb79.firebaseapp.com",
+      projectId: "ng-recipe-book-4eb79",
     };
     firebase.initializeApp(config);
   }

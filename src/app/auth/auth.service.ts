@@ -5,10 +5,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
   token: string;
-  constructor(private router: Router) {}
-  signupUser(email: string, password: string) {
+  constructor(private router: Router) { }
+  signupUser(email: string, password: string, displayName: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => console.log('usuario cadastrado com sucesso'))
+      .then(() => {
+        console.log('usuario cadastrado com sucesso')
+        firebase.auth().currentUser.updateProfile({ displayName: displayName,photoURL: null })
+          .then(() => console.log('nome atualizado com sucesso'))
+          .catch(() => console.error('erro ao atualizar profile'));
+      }
+      )
       .catch(error => {
         console.log(error);
       })
@@ -35,5 +41,9 @@ export class AuthService {
   logout() {
     firebase.auth().signOut();
     this.token = null;
+    this.router.navigate(['/signin'])
+  }
+  getUserName() {
+    return firebase.auth().currentUser.displayName;
   }
 }
