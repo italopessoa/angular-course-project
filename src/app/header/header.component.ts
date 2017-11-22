@@ -34,9 +34,12 @@ export class HeaderComponent {
     // });
 
     this.dataStorageService.getRecipes();
-      // .subscribe(
-      // (response: Response) => console.log(response.json()),
-      // (error) => console.log(error)
-      // );
+    // .subscribe(
+    // (response: Response) => console.log(response.json()),
+    // (error) => console.log(error)
+    // );
+  }
+  onLogout() {
+    this.authService.logout();
   }
 }
