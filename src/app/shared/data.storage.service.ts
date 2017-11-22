@@ -3,24 +3,24 @@ import { Http, Response } from "@angular/http";
 import { RecipeService } from "../recipes/recipe-list/recipe.service";
 import 'rxjs/Rx';
 import { Recipe } from "../recipes/recipe.model";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable()
 export class DataStorageService {
-  private fbServer: string = 'https://ng-recipe-book-4eb79.firebaseio.com/recipes.json';
-  constructor(private http: Http, private recipeService: RecipeService) { }
+  private fbServer: string = 'https://ng-recipe-book-4eb79.firebaseio.com/recipes.json?auth=';
+  constructor(private http: Http, private recipeService: RecipeService,private authService: AuthService) { }
 
   storeRecipes() {
-    return this.http.put(this.fbServer, this.recipeService.getRecipes());
+    return this.http.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    return this.http.get(this.fbServer)
+    return this.http.get(this.fbServer+this.authService.token)
       .map(
         (response: Response) => {
           const recipes: Recipe[] = response.json();
           for (let recipe of recipes) {
             if (!recipe['ingredients']) {
-              console.log(recipe.name);
               recipe['ingredients'] = [];
             }
           }
@@ -34,7 +34,7 @@ export class DataStorageService {
       );
   }
   getRecipesMap() {
-    return this.http.get(this.fbServer)
+    return this.http.get(this.fbServer+this.authService.token)
       .map(
       (response: Response) => {
         const data = response.json();
