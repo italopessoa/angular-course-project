@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { RecipeService } from '../recipes/recipe-list/recipe.service';
 import { DataStorageService } from '../shared/data.storage.service';
 import { Response } from '@angular/http';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { Response } from '@angular/http';
 export class HeaderComponent {
   @Output() onChangeView: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private dataStorageService: DataStorageService) {
+  constructor(private dataStorageService: DataStorageService, private authService: AuthService) {
 
   }
   changeView(view: string) {
