@@ -23,6 +23,7 @@ import { HttpModule } from '@angular/http';
 import { DataStorageService } from './shared/data.storage.service';
 import { SiginComponent } from './auth/sigin/sigin.component';
 import { SigupComponent } from './auth/sigup/sigup.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { SigupComponent } from './auth/sigup/sigup.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ShoppingListService, RecipeService, RecipeResolver, DataStorageService],
+  providers: [ShoppingListService, RecipeService, RecipeResolver, DataStorageService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

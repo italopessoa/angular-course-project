@@ -3,13 +3,18 @@
     <form (ngSubmit)="onSignUp(f)" #f="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" ngModel>
+        <input type="email" name="email" id="email" class="form-control" ngModel required #email="ngModel">
+        <span *ngIf="email.invalid && email.touched" class="help-block">Email is required!</span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="form-control" ngModel>
+        <input type="password" name="password" id="password" class="form-control" ngModel required minlength="6" #password="ngModel">
+        <div *ngIf="password.invalid && password.touched">
+          <span *ngIf="password.errors['minlength']" class="help-block">Password should be at least {{ password.errors['minlength'].requiredLength }} characters!</span>
+          <span *ngIf="password.errors['required']" class="help-block">Password is required!</span>
+        </div>
       </div>
-      <button class="btn btn-primary" type="submit">Sign Up</button>
+      <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Sign Up</button>
     </form>
   </div>
 </div>
