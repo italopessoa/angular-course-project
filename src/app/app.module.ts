@@ -9,7 +9,7 @@ import { ShoppingListModule } from './shopping/shopping-list/shopping-list.modul
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './auth/auth-guard.service';
-
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +21,7 @@ import { AuthGuard } from './auth/auth-guard.service';
     AuthModule,
     ShoppingListModule,
     CoreModule,
+    HttpClientModule,
   ],
   bootstrap: [AppComponent]
 })

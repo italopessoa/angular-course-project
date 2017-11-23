@@ -21,7 +21,8 @@ export class HeaderComponent {
     this.onChangeView.emit(view);
   }
   onSaveData() {
-    this.dataStorageService.storeRecipes()
+    // this.dataStorageService.storeRecipes()
+    this.dataStorageService.storeRecipesV2()
       .subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
@@ -34,7 +35,8 @@ export class HeaderComponent {
     //     console.log(recipes);
     // });
 
-    this.dataStorageService.getRecipes();
+    // this.dataStorageService.getRecipes();
+    this.dataStorageService.getRecipesV2();
     // .subscribe(
     // (response: Response) => console.log(response.json()),
     // (error) => console.log(error)
