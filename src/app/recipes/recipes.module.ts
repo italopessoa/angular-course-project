@@ -23,8 +23,8 @@ import { SharedModule } from "../shared/shared.module";
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     RecipesRoutingModel,
+    ReactiveFormsModule,
     SharedModule,
   ],
   providers: [RecipeResolver]

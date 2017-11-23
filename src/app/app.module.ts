@@ -20,14 +20,12 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { RecipesModule } from './recipes/recipes.module';
 import { SharedModule } from './shared/shared.module';
+import { ShoppingListModule } from './shopping/shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    ShoppingEditTemplateDrivenComponent,
     // ShoppingEditReactiveComponent,
     SiginComponent,
     SigupComponent
@@ -35,10 +33,10 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     RoutingModule,
-    FormsModule,
     HttpModule,
-    RecipesModule,
     SharedModule,
+    RecipesModule,
+    ShoppingListModule,
   ],
   providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
