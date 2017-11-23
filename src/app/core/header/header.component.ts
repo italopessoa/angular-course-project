@@ -11,6 +11,7 @@ import { AuthService } from '../../auth/auth.service';
 })
 
 export class HeaderComponent {
+
   @Output() onChangeView: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private dataStorageService: DataStorageService, private authService: AuthService) {
@@ -42,4 +43,7 @@ export class HeaderComponent {
   onLogout() {
     this.authService.logout();
   }
+
+  getUserName = () => this.authService.getUserName();
+  isAuthenticated = () => this.authService.isAuthenticated();
 }
