@@ -9,7 +9,7 @@ import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component
 import { SigupComponent } from "./auth/sigup/sigup.component";
 import { SiginComponent } from "./auth/sigin/sigin.component";
 import { AuthGuard } from "./auth/auth-guard.service";
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './core/home/home.component'
 
 const routes: Routes = [
   // { path: '', redirectTo: '/recipes', pathMatch: 'full' },
