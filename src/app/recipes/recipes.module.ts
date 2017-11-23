@@ -11,6 +11,7 @@ import { RecipeResolver } from "./recipe-list/recipe-resolver.service";
 import { CommonModule } from "@angular/common";
 import { RecipesRoutingModel } from "./recipes-routing.module";
 import { SharedModule } from "../shared/shared.module";
+import { AuthGuard } from "../auth/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { SharedModule } from "../shared/shared.module";
     ReactiveFormsModule,
     SharedModule,
   ],
-  providers: [RecipeResolver]
+  providers: [RecipeResolver, AuthGuard]
 })
 export class RecipesModule {
 
