@@ -10,6 +10,7 @@ import { DropdownDirective } from "../shared/dropdown.directive";
 import { RecipeResolver } from "./recipe-list/recipe-resolver.service";
 import { CommonModule } from "@angular/common";
 import { RecipesRoutingModel } from "./recipes-routing.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -19,12 +20,12 @@ import { RecipesRoutingModel } from "./recipes-routing.module";
     RecipeItemComponent,
     RecipeDetailComponent,
     RecipeEditComponent,
-    DropdownDirective
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RecipesRoutingModel
+    RecipesRoutingModel,
+    SharedModule,
   ],
   providers: [RecipeResolver]
 })
