@@ -9,10 +9,12 @@ import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component
 import { SigupComponent } from "./auth/sigup/sigup.component";
 import { SiginComponent } from "./auth/sigin/sigin.component";
 import { AuthGuard } from "./auth/auth-guard.service";
+import { HomeComponent } from './home/home.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-
+  // { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
