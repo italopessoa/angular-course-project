@@ -21,14 +21,13 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { RecipesModule } from './recipes/recipes.module';
 import { SharedModule } from './shared/shared.module';
 import { ShoppingListModule } from './shopping/shopping-list/shopping-list.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     // ShoppingEditReactiveComponent,
-    SiginComponent,
-    SigupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +35,7 @@ import { ShoppingListModule } from './shopping/shopping-list/shopping-list.modul
     HttpModule,
     SharedModule,
     RecipesModule,
+    AuthModule,
     ShoppingListModule,
   ],
   providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard],
