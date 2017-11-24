@@ -14,14 +14,17 @@ export class DataStorageService {
 
   storeRecipes() {
     // return this.http.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
-    return this.http.put(this.fbServer, this.recipeService.getRecipes(), {
-      params: new HttpParams().set('auth', this.authService.getToken())
+    return this.http.put(this.fbServerNew, this.recipeService.getRecipes(), {
+      // params: new HttpParams().set('auth', this.authService.getToken())
     });
   }
   storeRecipesV2() {
     // return this.httpClient.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
+    // const request = new HttpRequest('PUT',this.fbServerNew,this.recipeService.getRecipes(), {
+    //   reportProgress: true, params: new HttpParams().set('auth', this.authService.getToken())
+    // });
     const request = new HttpRequest('PUT',this.fbServerNew,this.recipeService.getRecipes(), {
-      reportProgress: true, params: new HttpParams().set('auth', this.authService.getToken())
+      reportProgress: true
     });
     return this.httpClient.request(request);
   }
