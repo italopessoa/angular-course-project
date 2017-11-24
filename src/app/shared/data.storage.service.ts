@@ -4,7 +4,7 @@ import { RecipeService } from "../recipes/recipe-list/recipe.service";
 import 'rxjs/Rx';
 import { Recipe } from "../recipes/recipe.model";
 import { AuthService } from "../auth/auth.service";
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
@@ -19,7 +19,11 @@ export class DataStorageService {
     });
   }
   storeRecipesV2() {
-    return this.httpClient.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
+    // return this.httpClient.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
+    const request = new HttpRequest('PUT',this.fbServerNew,this.recipeService.getRecipes(), {
+      reportProgress: true, params: new HttpParams().set('auth', this.authService.getToken())
+    });
+    return this.httpClient.request(request);
   }
 
   getRecipes() {
