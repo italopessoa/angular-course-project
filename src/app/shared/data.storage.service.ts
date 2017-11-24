@@ -4,15 +4,19 @@ import { RecipeService } from "../recipes/recipe-list/recipe.service";
 import 'rxjs/Rx';
 import { Recipe } from "../recipes/recipe.model";
 import { AuthService } from "../auth/auth.service";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
   private fbServer: string = 'https://ng-recipe-book-4eb79.firebaseio.com/recipes.json?auth=';
+  private fbServerNew: string = 'https://ng-recipe-book-4eb79.firebaseio.com/recipes.json';
   constructor(private http: Http, private recipeService: RecipeService,private authService: AuthService, private httpClient: HttpClient) { }
 
   storeRecipes() {
-    return this.http.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
+    // return this.http.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
+    return this.http.put(this.fbServer, this.recipeService.getRecipes(), {
+      params: new HttpParams().set('auth', this.authService.getToken())
+    });
   }
   storeRecipesV2() {
     return this.httpClient.put(this.fbServer+this.authService.token, this.recipeService.getRecipes());
