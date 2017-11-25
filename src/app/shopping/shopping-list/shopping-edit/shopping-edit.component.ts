@@ -1,7 +1,7 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter, OnInit } from '@angular/core'
+import { Component, ViewChild, ElementRef, Output, OnInit } from '@angular/core'
 import { NgForm } from "@angular/forms";
 import { Ingredient } from '../../../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
+// import { ShoppingListService } from '../shopping-list.service';
 import { NgModel } from '@angular/forms/src/directives/ng_model';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -21,7 +21,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedIngredient: Ingredient;
   @ViewChild('ingredientForm') form: NgForm;
 
-  constructor(private shoppingListService: ShoppingListService, private store: Store<fromShoppingList.AppState>) { }
+  constructor(/*private shoppingListService: ShoppingListService,*/ private store: Store<fromShoppingList.AppState>) { }
 
   addIngredient() {
     if (this.editMode) {
