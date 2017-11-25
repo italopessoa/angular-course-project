@@ -5,7 +5,6 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromShoppingList from './store/shopping-list.reducers';
 import * as ShoppingListActions from './store/shopping-list.actions';
 import * as fromApp from '../../store/app.reducers';
 
