@@ -4,11 +4,20 @@
     <!-- <app-shopping-edit-td></app-shopping-edit-td> -->
     <!-- <app-shopping-edit-reactive></app-shopping-edit-reactive> -->
     <hr>
-    <ul class="list-group">
+    <!-- <ul class="list-group">
       <a
         class="list-group-item"
         style="cursor: pointer;"
         *ngFor="let ingredient of ingredients"
+        (click)="onEditItem(ingredient.id)">
+        {{ingredient.name}} ({{ingredient.amount}})
+      </a>
+    </ul> -->
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer;"
+        *ngFor="let ingredient of (shoppingListState | async).ingredients"
         (click)="onEditItem(ingredient.id)">
         {{ingredient.name}} ({{ingredient.amount}})
       </a>
