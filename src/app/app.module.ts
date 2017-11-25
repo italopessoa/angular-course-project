@@ -11,7 +11,7 @@ import { CoreModule } from './core/core.module';
 import { AuthGuard } from './auth/auth-guard.service';
 import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from '@ngrx/store';
-import { shopppingListReducer } from './shopping/shopping-list/store/shopping-list.reducers'
+import { reducers } from './store/app.reducers';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { shopppingListReducer } from './shopping/shopping-list/store/shopping-li
     ShoppingListModule,
     CoreModule,
     HttpClientModule,
-    StoreModule.forRoot({ shoppingList: shopppingListReducer })
+    StoreModule.forRoot(reducers)
   ],
   bootstrap: [AppComponent]
 })
