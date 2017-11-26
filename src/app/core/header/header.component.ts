@@ -1,8 +1,12 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { RecipeService } from '../../recipes/recipe-list/recipe.service';
 import { DataStorageService } from '../../shared/data.storage.service';
 import { Response } from '@angular/http';
 import { AuthService } from '../../auth/auth.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import * as fromApp from '../../store/app.reducers';
+import * as fromAuth from '../../auth/store/auth.reducers';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +14,18 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit {
+  authState: Observable<fromAuth.State>;
   @Output() onChangeView: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService) {
-
+  constructor(private dataStorageService: DataStorageService, private authService: AuthService,
+    private store: Store<fromApp.AppState>) {
   }
+
+  ngOnInit() {
+    this.authState = this.store.select('auth');
+  }
+
   changeView(view: string) {
     this.onChangeView.emit(view);
   }
@@ -46,6 +55,15 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  getUserName = () => this.authService.getUserName();
+
+  // getUserName = () => this.authService.getUserName();
   isAuthenticated = () => this.authService.isAuthenticated();
+
+  getUserName() {
+    return this.authState.map(
+      (authState: fromAuth.State) => {
+        return authState.userName;
+      }
+    );
+  }
 }

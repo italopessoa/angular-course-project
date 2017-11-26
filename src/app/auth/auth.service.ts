@@ -1,17 +1,25 @@
-import * as firebase from 'firebase';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import * as firebase from 'firebase';
+import * as fromApp from '../store/app.reducers';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Injectable()
 export class AuthService {
   token: string;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<fromApp.AppState>) { }
+
   signupUser(email: string, password: string, displayName: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
         console.log('usuario cadastrado com sucesso')
+        this.store.dispatch(new AuthActions.Signup());
         firebase.auth().currentUser.updateProfile({ displayName: displayName,photoURL: null })
-          .then(() => console.log('nome atualizado com sucesso'))
+          .then(() => {
+            console.log('nome atualizado com sucesso')
+            }
+          )
           .catch(() => console.error('erro ao atualizar profile'));
       }
       )
@@ -23,6 +31,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
         this.getToken();
+        this.store.dispatch(new AuthActions.Signin(response.displayName));
         console.log(response)
         this.router.navigate(['/']);
       })
@@ -31,7 +40,10 @@ export class AuthService {
   getToken() {
     firebase.auth().currentUser.getIdToken()
       .then(
-      (token: string) => this.token = token
+        (token: string) => {
+          this.token = token
+          this.store.dispatch(new AuthActions.SetToken(token));
+        }
       );
     return this.token;
   }

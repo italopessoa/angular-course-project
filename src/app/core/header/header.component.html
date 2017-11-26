@@ -13,12 +13,12 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <ng-template [ngIf]="!isAuthenticated()">
+        <ng-template [ngIf]="!(authState | async).authenticated">
           <li routerLinkActive="active"><a routerLink="/signup">Register</a></li>
           <li routerLinkActive="active"><a routerLink="/signin">Login</a></li>
         </ng-template>
-        <ng-template [ngIf]="isAuthenticated()">
-          <li><a>Hi, <strong>{{getUserName()}}!</strong></a></li>
+        <ng-template [ngIf]="(authState | async).authenticated">
+          <li><a>Hi, <strong>{{getUserName() | async}}!</strong></a></li>
           <li><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
           <li class="dropdown" appDropdown>
             <a class="dropdown-toggle" role="button">Manage
