@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
+import * as AuthActions from '../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.authState = this.store.select('auth');
+    this.store.select('auth').map((authState: fromAuth.State) => {
+      console.log('authState.userName', authState.userName);
+    });
   }
 
   changeView(view: string) {
@@ -52,7 +56,8 @@ export class HeaderComponent implements OnInit {
     // );
   }
   onLogout() {
-    this.authService.logout();
+    // this.authService.logout();
+    this.store.dispatch(new AuthActions.Logout());
   }
 
 

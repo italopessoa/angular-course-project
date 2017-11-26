@@ -11,9 +11,9 @@ import 'rxjs/add/operator/switchMap';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private store: Store<fromApp.AppState>) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Intercepted: ", req);
 
-    return this.store.select('auth').switchMap((authState: fromAuth.State) => {
+    return this.store.select('auth').take(1).switchMap((authState: fromAuth.State) => {
+      console.log("Intercepted: ", req);
       const copiedRequest = req.clone({ params: req.params.set('auth', authState.token) })
       return next.handle(copiedRequest);
     });
