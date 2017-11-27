@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import * as firebase from 'firebase';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthEffects {
@@ -32,6 +33,7 @@ export class AuthEffects {
     })
     .mergeMap((token: string) => {
       console.log('.mergeMap((token: string) => {')
+      this.router.navigate(['/']);
       return [
         {
           type: AuthActions.SIGNUP
@@ -43,7 +45,37 @@ export class AuthEffects {
       ];
     }
     );
-
-  constructor(private actions$: Actions) {
+    @Effect()
+    authSignin = this.actions$
+      .ofType(AuthActions.TRY_SIGNIN)
+      .map((action: AuthActions.TrySignin) => {
+        console.log('.map((action: AuthActions.TrySignin) => {')
+        return action.payload;
+      })
+      .switchMap((userData: {username: string, password: string}) => {
+        console.log('.switchMap((userData: {username: string, password: string}) => {')
+        return fromPromise(
+          firebase.auth().signInWithEmailAndPassword(userData.username, userData.password)
+        )
+      })
+      .switchMap(() => {
+        console.log('.switchMap(() => {')
+        return fromPromise(firebase.auth().currentUser.getIdToken())
+      })
+      .mergeMap((token: string) =>{
+        console.log('.mergeMap((token: string) =>{')
+        this.router.navigate(['/']);
+        return [
+          {
+            type: AuthActions.SIGNIN,
+            payload: firebase.auth().currentUser.displayName
+          },
+          {
+            type: AuthActions.SET_TOKEN,
+            payload: token
+          }
+        ]
+      })
+  constructor(private actions$: Actions, private router: Router) {
   }
 }
