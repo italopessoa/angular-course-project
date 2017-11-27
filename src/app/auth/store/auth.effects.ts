@@ -16,10 +16,15 @@ export class AuthEffects {
       console.log('.map((action: AuthActions.TrySignup)')
       return action.payload;
     })
-    .switchMap((authData: { username: string, password: string }) => {
+    .switchMap((authData: { username: string, password: string, displayName: string }) => {
       console.log('.switchMap((authData: { username: string, password: string }) => {')
-      return fromPromise(firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password));
-    }
+      return fromPromise(
+          firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password)
+          .then(() => {
+            return firebase.auth().currentUser.updateProfile({ displayName: authData.displayName,photoURL: null })
+          })
+        );
+      }
     )
     .switchMap(() => {
       console.log('return fromPromise(firebase.auth().currentUser.getIdToken());')

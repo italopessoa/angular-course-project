@@ -27,7 +27,7 @@ export class SetToken implements Action {
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
-  constructor(public payload: { username: string, password: string }) { }
+  constructor(public payload: { username: string, password: string, displayName: string }) { }
 }
 
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup;
