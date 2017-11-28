@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as fromRecipe from '../../recipes/store/recipe.reducers';
+import * as RecipeActions from '../../recipes/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +22,7 @@ export class HeaderComponent implements OnInit {
   @Output() onChangeView: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private dataStorageService: DataStorageService, private authService: AuthService,
-    private store: Store<fromApp.AppState>) {
+    private store: Store<fromRecipe.FeatureState>) {
   }
 
   ngOnInit() {
@@ -35,11 +37,12 @@ export class HeaderComponent implements OnInit {
   }
   onSaveData() {
     // this.dataStorageService.storeRecipes()
-    this.dataStorageService.storeRecipesV2()
-      .subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-      );
+    // this.dataStorageService.storeRecipesV2()
+    //   .subscribe(
+    //   (response) => console.log(response),
+    //   (error) => console.log(error)
+    //   );
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
   onFetchData() {
     // this.dataStorageService.getRecipesMap()
@@ -49,7 +52,8 @@ export class HeaderComponent implements OnInit {
     // });
 
     // this.dataStorageService.getRecipes();
-    this.dataStorageService.getRecipesV2();
+    // this.dataStorageService.getRecipesV2();
+    this.store.dispatch(new RecipeActions.FetchRecipes());
     // .subscribe(
     // (response: Response) => console.log(response.json()),
     // (error) => console.log(error)
