@@ -49,7 +49,7 @@ export class DataStorageService {
       );
   }
   getRecipesV2() {
-    return this.httpClient.get<Recipe[]>(this.fbServer+this.authService.token)
+    return this.httpClient.get<Recipe[]>(this.fbServerNew)
       .map(
         (recipes) => {
           for (let recipe of recipes) {
