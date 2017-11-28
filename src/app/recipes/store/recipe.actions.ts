@@ -17,7 +17,7 @@ export class AddRecipe implements Action {
   constructor(public payload: Recipe) { }
 }
 
-export class UpdateRecipes implements Action {
+export class UpdateRecipe implements Action {
   readonly type = UPDATE_RECIPE;
   constructor(public payload: Recipe) { }
 }
@@ -32,5 +32,5 @@ export class SelectRecipe implements Action {
   constructor(public payload: number) { }
 }
 
-export type RecipeActions = SetRecipes | AddRecipe | UpdateRecipes | DeleteRecipe | SelectRecipe;
+export type RecipeActions = SetRecipes | AddRecipe | UpdateRecipe | DeleteRecipe | SelectRecipe;
 
