@@ -2,12 +2,14 @@ import { Recipe } from "../recipe.model";
 import { Ingredient } from "../../shared/ingredient.model";
 import { initializeApp } from "firebase";
 import * as RecipeActions from "./recipe.actions";
+import * as fromApp from "../../store/app.reducers";
 
-export interface FeatureState {
-  recipes: State
+export interface FeatureState extends fromApp.AppState {
+  recipes: State,
 }
 export interface State {
-  recipes: Recipe[]
+  recipes: Recipe[],
+  selectedRecipe: Recipe,
 }
 const initialState: State = {
   recipes: [
@@ -25,7 +27,8 @@ const initialState: State = {
       new Ingredient("Sal", 1)
     ]
     )
-  ]
+  ],
+  selectedRecipe: null,
 }
 
 export function recipeReducer(state = initialState, action: RecipeActions.RecipeActions) {
@@ -33,7 +36,8 @@ export function recipeReducer(state = initialState, action: RecipeActions.Recipe
     case RecipeActions.SET_RECIPES:
       return {
         ...state,
-        recipes: [...action.payload]
+        recipes: [...action.payload],
+        selectedRecipe: null,
       }
     case RecipeActions.ADD_RECIPE:
       return {
@@ -55,10 +59,17 @@ export function recipeReducer(state = initialState, action: RecipeActions.Recipe
       }
     case RecipeActions.DELETE_RECIPE:
       const oldRecipes = [...state.recipes]
-      oldRecipes.splice(oldRecipes.findIndex(r => r.id === action.payload));
+      oldRecipes.splice(oldRecipes.findIndex(r => r.id === action.payload), 1);
       return {
         ...state,
         recipes: oldRecipes
+      }
+    case RecipeActions.SELECT_RECIPE:
+      const recipeIndex = state.recipes.findIndex(r => r.id === action.payload);
+      const recipe = state.recipes[recipeIndex];
+      return {
+        ...state,
+        selectedRecipe: recipe,
       }
     default:
       return state

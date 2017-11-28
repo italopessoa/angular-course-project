@@ -12,7 +12,8 @@ const recipesRoutes: Routes = [
     path: '', component: RecipesComponent, children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
-      { path: ':id/detail', component: RecipeDetailComponent, resolve: { recipe: RecipeResolver } },
+      // { path: ':id/detail', component: RecipeDetailComponent, resolve: { recipe: RecipeResolver } },
+      { path: ':id/detail', component: RecipeDetailComponent },
       { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }
     ]
   }
