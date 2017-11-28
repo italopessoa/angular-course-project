@@ -12,6 +12,8 @@ import { CommonModule } from "@angular/common";
 import { RecipesRoutingModel } from "./recipes-routing.module";
 import { SharedModule } from "../shared/shared.module";
 import { AuthGuard } from "../auth/auth-guard.service";
+import { StoreModule } from "@ngrx/store";
+import { recipeReducer } from "./store/recipe.reducers";
 
 @NgModule({
   declarations: [
@@ -27,8 +29,10 @@ import { AuthGuard } from "../auth/auth-guard.service";
     RecipesRoutingModel,
     ReactiveFormsModule,
     SharedModule,
+    StoreModule.forFeature('recipes', recipeReducer)
   ],
   providers: [RecipeResolver, AuthGuard]
+
 })
 export class RecipesModule {
 
